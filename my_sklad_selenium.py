@@ -38,5 +38,5 @@ wait.until(EC.element_to_be_clickable(workers)).click()
 time.sleep(5)
 
 src = driver.page_source
-with open("index.html","w") as file:
+with open("dependencies/index.html","w") as file:
     file.write(src)

@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 import json
 import re
-with open("index.html") as file:
+with open("dependencies/index.html") as file:
     src = file.read()
 
 soup = BeautifulSoup(src,"lxml")
@@ -16,6 +16,6 @@ dict_data_celler = {
 }
 print(dict_data_celler)
 
-with open("name.json","w") as file:
+with open("dependencies/name.json","w") as file:
     json.dump(dict_data_celler,file,indent=4,ensure_ascii=False)
 
