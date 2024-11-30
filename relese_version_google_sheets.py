@@ -38,13 +38,16 @@ wait.until(EC.element_to_be_clickable(login_field)).send_keys(key_my_sklad["Logi
 wait.until(EC.element_to_be_clickable(password_field)).send_keys(key_my_sklad["Key"])   # входим в аккаунт
 wait.until(EC.element_to_be_clickable(entry_button)).click()
 
+driver.implicitly_wait(2)
+
 driver.get(f"https://online.moysklad.ru/app/#pnl?periodFilter={current_data}%2000:00:00,{current_data}%2023:59:00,inside_period&global_retailStoreFilter=%5B4ebadb98-ece1-11ee-0a80-010a000b7214%5C%5C,Ашан%20Рязанка%5C%5C,%5C%5C,RetailStore%5D,equals&sort=goodName%20a")
 wait.until(EC.element_to_be_clickable(workers)).click()                                 # переходим на нужную страницу и выбираем по работникам
-time.sleep(5)
 
+driver.implicitly_wait(5)
 src = driver.page_source                                                                # получаем page_source
 driver.close()
 driver.quit()
+
 soup = BeautifulSoup(src,"lxml")
 
 try:
@@ -75,10 +78,10 @@ wks = sh.worksheet("Лист1")                                                 
 
 current_date_for_gs = datetime.datetime.now().strftime('%d')
 
-wks.update_cell(0+int(current_date_for_gs),4, dict_data_celler["Name"])     # Имя
-wks.update_cell(0+int(current_date_for_gs),5,dict_data_celler["Revenue"])   # выручка ТО
-wks.update_cell(0+int(current_date_for_gs),6,dict_data_celler["Checks"])    # количество чеков
-wks.update_cell(0+int(current_date_for_gs),8,dict_data_celler["Margin"])    # Маржинальность
+wks.update_cell(5+int(current_date_for_gs),4, dict_data_celler["Name"])     # Имя
+wks.update_cell(5+int(current_date_for_gs),5,dict_data_celler["Revenue"])   # выручка ТО
+wks.update_cell(5+int(current_date_for_gs),6,dict_data_celler["Checks"])    # количество чеков
+wks.update_cell(5+int(current_date_for_gs),8,dict_data_celler["Margin"])    # Маржинальность
 
 
 
