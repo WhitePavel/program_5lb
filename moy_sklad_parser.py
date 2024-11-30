@@ -5,16 +5,27 @@ with open("dependencies/index.html") as file:
     src = file.read()
 
 soup = BeautifulSoup(src,"lxml")
+try:
+    celler_data = soup.find("tr",onclick=True).find_all(["a","div"],title=True)
+except Exception:
+    celler_data = []
 
-celler_data = soup.find("tr",onclick=True).find_all(["a","div"],title=True)
-dict_data_celler = {
-    "Name":celler_data[0].text,
-    "Checks":celler_data[1].text.replace("\xa0"," "),
-    "Revenue":celler_data[3].text.replace("\xa0"," "),
-    "Margin":celler_data[11].text.replace("\xa0"," ")
+if bool(celler_data) == True:
+    dict_data_celler = {
+        "Name":celler_data[0].text,
+        "Checks":celler_data[1].text.replace("\xa0"," "),
+        "Revenue":celler_data[3].text.replace("\xa0"," "),
+        "Margin":celler_data[11].text.replace("\xa0"," ")
 
-}
-print(dict_data_celler)
+    }
+else:
+    dict_data_celler = {
+        "Name": "Продавец",
+        "Checks": "0",
+        "Revenue": "0",
+        "Margin": "0"
+
+    }
 
 with open("dependencies/name.json","w") as file:
     json.dump(dict_data_celler,file,indent=4,ensure_ascii=False)

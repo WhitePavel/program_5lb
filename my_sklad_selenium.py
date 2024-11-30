@@ -1,4 +1,3 @@
-import os
 import time
 import datetime
 import json
@@ -17,7 +16,7 @@ service = Service(executable_path=ChromeDriverManager().install())
 driver = webdriver.Chrome(service=service,options=chrome_options)
 wait = WebDriverWait(driver,20,poll_frequency=15)   # время ожидания и интервал запросов
 
-with open("/Users/pavelprosvetov/my_sklad_key.json") as file_json:
+with open("dependencies/my_sklad_key.json") as file_json:
     key_my_sklad = json.load(file_json)
 
 driver.get('https://www.moysklad.ru/login/')
