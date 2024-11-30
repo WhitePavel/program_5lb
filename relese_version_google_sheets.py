@@ -73,7 +73,7 @@ else:
     }
 
 gc = gspread.service_account(filename="dependencies/cred.json")                                  # импортируем gspread для работы с гугл таблицой
-sh = gc.open_by_key('10Nf1CQChZLtu4zLXWrDqEwNEEZmOivhRkbjD51T6H7k')                              # ключ таблицы
+sh = gc.open_by_key(key_my_sklad["gs_id"])                                                       # ключ таблицы
 wks = sh.worksheet("Лист1")                                                                      # рабочий лист
 
 current_date_for_gs = datetime.datetime.now().strftime('%d')
