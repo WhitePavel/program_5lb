@@ -19,12 +19,6 @@ response = requests.request("GET", url, headers=headers, data=payload)
 
 src=json.loads(response.text)
 
-print(src["rows"][0]["employee"]["name"])
-print((src["rows"][0]["salesCount"]))
-print((src["rows"][0]["sellSum"])/100)
-print((src["rows"][0]["profit"])/100)
-
-
 gc = gspread.service_account(filename="dependencies/cred.json")                                  # импортируем gspread для работы с гугл таблицой
 sh = gc.open_by_key(os.getenv("GS_TOKEN"))                                                       # ключ таблицы
 wks = sh.worksheet("Рязанка Декабрь")                                                            # рабочий лист
